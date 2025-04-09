@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Lower Third Display</title>
+  <style>
+    body {
+      margin: 0;
+      background: transparent;
+      overflow: hidden;
+    }
+    img {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      max-width: 100%;
+      max-height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <img id="slide" src="images/1.png" />
+  <script>
+    function updateSlide() {
+      fetch('current.txt?_=' + Date.now())
+        .then(res => res.text())
+        .then(name => {
+          const trimmed = name.trim();
+          console.log(trimmed);
+          document.getElementById('slide').src = `images/${trimmed}`;
+        });
+    }
+    setInterval(updateSlide, 500);
+  </script>
+</body>
+</html>
